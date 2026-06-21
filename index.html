@@ -545,7 +545,7 @@ audio.volume = 0.7;
 let musicPlaying = false;
 
 function startMusic(){
-  if(musicPlaying) return;
+  if(!audio.paused) return; // Already playing — do nothing
   audio.play().catch(()=>{});
   musicPlaying = true;
   document.getElementById('musicBtn').textContent = '🎵';
@@ -558,15 +558,19 @@ function stopMusic(){
 }
 
 function toggleMusic(){
-  if(musicPlaying) stopMusic();
+  if(!audio.paused) stopMusic();
   else startMusic();
 }
 
 /* ════════════════════════════════════════
    START OVERLAY (handles autoplay policy)
 ════════════════════════════════════════ */
+let _started = false;
 function startExperience(){
-  document.getElementById('startOverlay').style.display = 'none';
+  if(_started) return;
+  _started = true;
+  const overlay = document.getElementById('startOverlay');
+  overlay.style.display = 'none';
   startMusic();
 }
 
