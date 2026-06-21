@@ -341,7 +341,7 @@ html,body{
   <div class="start-box">
     <div class="start-emoji">🌸💜🌸</div>
     <h2>For you, nanna</h2>
-    <p>Tap to open your surprise with music 🎵</p>
+    <p>Tap to open your surprise 🌸</p>
     <button class="start-btn">Open 💜</button>
   </div>
 </div>
@@ -545,6 +545,7 @@ audio.volume = 0.7;
 let musicPlaying = false;
 
 function startMusic(){
+  if(musicPlaying) return;
   audio.play().catch(()=>{});
   musicPlaying = true;
   document.getElementById('musicBtn').textContent = '🎵';
